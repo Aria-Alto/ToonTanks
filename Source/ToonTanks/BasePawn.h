@@ -15,13 +15,6 @@ public:
 	// Sets default values for this pawn's properties
 	ABasePawn();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float speed {400.f};
-
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	class UCapsuleComponent* capsuleComp;
@@ -31,10 +24,5 @@ private:
 	UStaticMeshComponent* turretMesh;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	USceneComponent* projectileSpawnPoint;
-	
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 
 };
