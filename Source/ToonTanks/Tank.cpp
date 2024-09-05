@@ -21,8 +21,8 @@ ATank::ATank() {
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-	playerControllerRef = Cast<APlayerController>(GetController());
-    if(playerControllerRef == nullptr) {
+	tankPlayerController = Cast<APlayerController>(GetController());
+    if(tankPlayerController == nullptr) {
         UE_LOG(LogTemp, Display, TEXT("PlayerController has not been initialized"));
     }
 }
@@ -44,10 +44,10 @@ void ATank::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-    if (playerControllerRef) {
+    if (tankPlayerController) {
         // checking the linetrace from the camera to the cursor in order to aim the turret
         FHitResult hitResult;
-        playerControllerRef->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, false, hitResult);
+        tankPlayerController->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, false, hitResult);
         // drawing debug sphere
         DrawDebugSphere(GetWorld(), 
             hitResult.ImpactPoint, 
@@ -57,6 +57,12 @@ void ATank::Tick(float DeltaTime)
     }
 }
 
+void ATank::HandleDestruction() {
+    Super::HandleDestruction();
+    SetActorHiddenInGame(true);
+    SetActorTickEnabled(false);
+}
+ 
 void ATank::Move(float value) {
     if (value == 0) { return;}
     // x = deltalocation * delta time * speed

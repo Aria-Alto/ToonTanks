@@ -27,10 +27,14 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	void HandleDestruction();
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "movement")
 	float speed {200.f};
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "movement")
 	float turnRate {45.f};
+
+	APlayerController* GetTankPlayerController() const {return tankPlayerController;}
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
@@ -38,7 +42,7 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* camera;
 
-	APlayerController* playerControllerRef;
+	APlayerController* tankPlayerController;
 
 	void Move(float value);
 	void Turn(float value);

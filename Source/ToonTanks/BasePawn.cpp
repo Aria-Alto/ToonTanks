@@ -25,6 +25,10 @@ ABasePawn::ABasePawn()
 
 }
 
+void ABasePawn::HandleDestruction() {
+	// TODO: Visual / sound affects
+}
+
 
 void ABasePawn::RotateTurret(FVector lookAtTarget) {
 	// to-target vector -> from turret location to mouse-cursor
