@@ -39,9 +39,16 @@ private:
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* hitComp, AActor* otherActor, UPrimitiveComponent* otherComp, FVector normalImpulse, const FHitResult& hit);
 
+	// visual effects
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	class UParticleSystem* hitParticles;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combat", meta = (AllowPrivateAccess = "true"))
 	class UParticleSystemComponent* tailComponent;
+
+	// sounds
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (AllowPrivateAccess = "true"))
+	class USoundBase* launchSound;
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (AllowPrivateAccess = "true"))
+	USoundBase* hitSound;
 
 };
