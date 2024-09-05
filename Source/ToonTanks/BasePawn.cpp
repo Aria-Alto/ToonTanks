@@ -5,6 +5,7 @@
 #include "Components/CapsuleComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Projectile.h"
+#include "Particles/ParticleSystemComponent.h"
 
 
 // Sets default values
@@ -27,6 +28,9 @@ ABasePawn::ABasePawn()
 
 void ABasePawn::HandleDestruction() {
 	// TODO: Visual / sound affects
+	if (explotionParticle) {
+		UGameplayStatics::SpawnEmitterAtLocation(this, explotionParticle, GetActorLocation(), GetActorRotation());
+	}
 }
 
 
