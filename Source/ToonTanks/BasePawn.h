@@ -40,4 +40,8 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (AllowPrivateAccess = "true"))
 	USoundBase* deathSound;
 
+	// camera shake
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<class UCameraShakeBase> deathCameraShakeClass;
+
 };
