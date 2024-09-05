@@ -36,6 +36,8 @@ public:
 
 	APlayerController* GetTankPlayerController() const {return tankPlayerController;}
 
+	bool bAlive {true};
+
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* springArm;
