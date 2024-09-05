@@ -5,7 +5,6 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
-#include "DrawDebugHelpers.h"
 // #include "Engine/EngineTypes.h"
 
 
@@ -35,6 +34,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
     PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::Move);
     PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ATank::Turn);
+    PlayerInputComponent->BindAction(TEXT("Fire"), IE_Pressed, this, &ATank::Fire);
 
 }
 
@@ -44,14 +44,17 @@ void ATank::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-    // checking the linetrace from the camera to the cursor in order to aim the turret
-    FHitResult hitResult;
-    playerControllerRef->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, false, hitResult);
-    // drawing debug sphere
-    DrawDebugSphere(
-        GetWorld(), 
-        hitResult.ImpactPoint, 
-        25, 12, FColor::Red, false, -1.f);
+    if (playerControllerRef) {
+        // checking the linetrace from the camera to the cursor in order to aim the turret
+        FHitResult hitResult;
+        playerControllerRef->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, false, hitResult);
+        // drawing debug sphere
+        DrawDebugSphere(GetWorld(), 
+            hitResult.ImpactPoint, 
+            25, 12, FColor::Blue, false, -1.f);
+        
+        RotateTurret(hitResult.ImpactPoint);
+    }
 }
 
 void ATank::Move(float value) {
